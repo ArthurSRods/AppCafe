@@ -1,6 +1,15 @@
 import React from "react";
 import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import { useFonts, Inter_400Regular, Inter_600SemiBold } from "@expo-google-fonts/inter"; 
+import { useFonts, Inter_400Regular, Inter_600SemiBold } from "@expo-google-fonts/inter";
+
+import cafeImg from "./assets/cafe.jpg";
+import espressoImg from "./assets/espresso.png";
+import duploImg from "./assets/duplo.png";
+import coadoImg from "./assets/coado.png";
+import cappuccinoImg from "./assets/cappuccino.png";
+import macchiattoImg from "./assets/macchiatto.png";
+import latteImg from "./assets/latte.png";
+import caramelImg from "./assets/caramel.png";
 
 const estabelecimento = {
   nome: "Geno Café",
@@ -10,13 +19,13 @@ const estabelecimento = {
 };
 
 const cafe = [
-  { id: "1", produto: "Expresso Simples", preco: "R$ 7,00", descricao: "Café puro e intenso, feito sob pressão.", imagem: "https://upload.wikimedia.org/wikipedia/commons/4/45/Espresso1.jpg" },
-  { id: "2", produto: "Expresso Duplo", preco: "R$ 9,00", descricao: "O dobro de sabor e intensidade do expresso simples.", imagem: "https://upload.wikimedia.org/wikipedia/commons/9/95/Espresso_doppio.jpg" },
-  { id: "3", produto: "Coado", preco: "R$ 10,00", descricao: "Café filtrado lentamente para um sabor equilibrado.", imagem: "https://upload.wikimedia.org/wikipedia/commons/c/c2/Pourover_coffee.jpg" },
-  { id: "4", produto: "Cappuccino", preco: "R$ 12,00", descricao: "Café expresso com leite vaporizado e espuma de leite.", imagem: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cappuccino_at_Sightglass_Coffee.jpg" },
-  { id: "5", produto: "Macchiato", preco: "R$ 10,00", descricao: "Expresso com um toque de espuma de leite.", imagem: "https://upload.wikimedia.org/wikipedia/commons/4/45/Macchiato.jpg" },
-  { id: "6", produto: "Latte", preco: "R$ 12,00", descricao: "Expresso suave com bastante leite vaporizado.", imagem: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Latte_art.jpg" },
-  { id: "7", produto: "Caramel Latte", preco: "R$ 14,00", descricao: "Latte com um toque adocicado de caramelo.", imagem: "https://upload.wikimedia.org/wikipedia/commons/2/21/Caramel_macchiato.jpg" }
+  { id: "1", produto: "Expresso Simples", preco: "R$ 7,00", descricao: "Café puro e intenso, feito sob pressão.", imagem: espressoImg},
+  { id: "2", produto: "Expresso Duplo", preco: "R$ 9,00", descricao: "O dobro de sabor e intensidade do expresso simples.", imagem: duploImg },
+  { id: "3", produto: "Coado", preco: "R$ 10,00", descricao: "Café filtrado lentamente para um sabor equilibrado.", imagem: coadoImg },
+  { id: "4", produto: "Cappuccino", preco: "R$ 12,00", descricao: "Café expresso com leite vaporizado e espuma de leite.", imagem: cappuccinoImg},
+  { id: "5", produto: "Macchiato", preco: "R$ 10,00", descricao: "Expresso com um toque de espuma de leite.", imagem: macchiattoImg },
+  { id: "6", produto: "Latte", preco: "R$ 12,00", descricao: "Expresso suave com bastante leite vaporizado.", imagem: latteImg },
+  { id: "7", produto: "Caramel Latte", preco: "R$ 14,00", descricao: "Latte com um toque adocicado de caramelo.", imagem: caramelImg }
 ];
 
 const pratos = [
@@ -43,7 +52,7 @@ export default function App() {
       </TouchableOpacity>
 
       {/* Imagem do Estabelecimento */}
-      <Image source={{ uri: "https://source.unsplash.com/600x300/?cafe" }} style={styles.estabelecimentoImagem} />
+      <Image source={{ uri: "https://img.freepik.com/fotos-gratis/barista-de-cafeteria-serve-bebidas-quentes-em-mesa-de-madeira-gerada-por-inteligencia-artificial_188544-85026.jpg?t=st=1743616926~exp=1743620526~hmac=dc808172812bdb8d6d246a77bffb9ce6d86a9e229b114418ae2e452bdaf9c81d&w=1060" }} style={styles.estabelecimentoImagem} />
 
       {/* Informações do Estabelecimento */}
       <View style={styles.card}>
@@ -64,7 +73,7 @@ export default function App() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.itemCard}>
-            <Image source={{ uri: item.imagem }} style={styles.itemImagem} />
+            <Image source={typeof item.imagem === "string" ? { uri: item.imagem } : item.imagem} style={styles.itemImagem} />
             <View style={styles.itemInfo}>
               <Text style={styles.itemNome}>{item.produto}</Text>
               <Text style={styles.itemDescricao}>{item.descricao}</Text>
