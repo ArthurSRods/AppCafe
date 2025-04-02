@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useFonts, Inter_400Regular, Inter_600SemiBold } from "@expo-google-fonts/inter";
 
-import cafeImg from "./assets/cafe.jpg";
 import espressoImg from "./assets/espresso.png";
 import duploImg from "./assets/duplo.png";
 import coadoImg from "./assets/coado.png";
