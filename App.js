@@ -10,6 +10,13 @@ import macchiattoImg from "./assets/macchiatto.png";
 import latteImg from "./assets/latte.png";
 import caramelImg from "./assets/caramel.png";
 
+import paodequeijoImg from "./assets/paodequeijo.jpg";
+import salameruculaImg from "./assets/salamerucula.png";
+import rosbifeImg from "./assets/rosbife.jpg";
+import parmabufalaImg from "./assets/parmabufala.jpg";
+import toastovosImg from "./assets/toastovos.jpg";
+import avocadoImg from "./assets/avocado.png";
+
 const estabelecimento = {
   nome: "Geno Café",
   descricao: "Um lugar aconchegante para amantes de cafés especiais. Oferecemos grãos selecionados e um ambiente acolhedor.",
@@ -28,12 +35,12 @@ const cafe = [
 ];
 
 const pratos = [
-  { id: "1", produto: "Porção de Pães de Queijo", preco: "R$ 12,00", descricao: "Seis unidades de pães de queijo crocantes e macios por dentro.", imagem: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Pao_de_queijo.jpg" },
-  { id: "2", produto: "Sanduíche de Salame e Rúcula", preco: "R$ 18,00", descricao: "Pão artesanal, salame italiano e rúcula fresca.", imagem: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Salami_sandwich.jpg" },
-  { id: "3", produto: "Sanduíche de Rosbife", preco: "R$ 22,00", descricao: "Rosbife artesanal, mostarda dijon e pão crocante.", imagem: "https://upload.wikimedia.org/wikipedia/commons/8/8b/Roast_beef_sandwich.jpg" },
-  { id: "4", produto: "Sanduíche de Parma e Búfala", preco: "R$ 24,00", descricao: "Presunto de Parma, queijo búfala e rúcula no pão ciabatta.", imagem: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Parma_sandwich.jpg" },
-  { id: "5", produto: "Toast com Ovos", preco: "R$ 16,00", descricao: "Torrada com ovos mexidos cremosos e temperos especiais.", imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2b/Eggs_on_toast.jpg" },
-  { id: "6", produto: "Avocado Toast", preco: "R$ 20,00", descricao: "Torrada de pão integral com avocado temperado e ovos pochê.", imagem: "https://upload.wikimedia.org/wikipedia/commons/9/97/Avocado_toast.jpg" }
+  { id: "1", produto: "Porção de Pães de Queijo", preco: "R$ 12,00", descricao: "Seis unidades de pães de queijo crocantes e macios por dentro.", imagem: paodequeijoImg },
+  { id: "2", produto: "Sanduíche de Salame e Rúcula", preco: "R$ 18,00", descricao: "Pão artesanal, salame italiano e rúcula fresca.", imagem: salameruculaImg },
+  { id: "3", produto: "Sanduíche de Rosbife", preco: "R$ 22,00", descricao: "Rosbife artesanal, mostarda dijon e pão crocante.", imagem: rosbifeImg },
+  { id: "4", produto: "Sanduíche de Parma e Búfala", preco: "R$ 24,00", descricao: "Presunto de Parma, queijo búfala e rúcula no pão ciabatta.", imagem: parmabufalaImg },
+  { id: "5", produto: "Toast com Ovos", preco: "R$ 16,00", descricao: "Torrada com ovos mexidos cremosos e temperos especiais.", imagem: toastovosImg },
+  { id: "6", produto: "Avocado Toast", preco: "R$ 20,00", descricao: "Torrada de pão integral com avocado temperado e ovos pochê.", imagem: avocadoImg }
 ];
 
 export default function App() {
