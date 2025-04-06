@@ -10,7 +10,7 @@ import macchiattoImg from "./assets/macchiatto.png";
 import latteImg from "./assets/latte.png";
 import caramelImg from "./assets/caramel.png";
 
-import paodequeijoImg from "./assets/paodequeijo.jpg";
+import paodequeijoImg from "./assets/paodequeijo.png";
 import salameruculaImg from "./assets/salamerucula.png";
 import rosbifeImg from "./assets/rosbife.jpg";
 import parmabufalaImg from "./assets/parmabufala.jpg";
@@ -42,6 +42,10 @@ const pratos = [
   { id: "5", produto: "Toast com Ovos", preco: "R$ 16,00", descricao: "Torrada com ovos mexidos cremosos e temperos especiais.", imagem: toastovosImg },
   { id: "6", produto: "Avocado Toast", preco: "R$ 20,00", descricao: "Torrada de pão integral com avocado temperado e ovos pochê.", imagem: avocadoImg }
 ];
+
+const getImageSource = (imagem) =>
+  typeof imagem === "string" ? { uri: imagem } : imagem;
+
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Inter_400Regular, Inter_600SemiBold });
@@ -79,7 +83,7 @@ export default function App() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.itemCard}>
-            <Image source={typeof item.imagem === "string" ? { uri: item.imagem } : item.imagem} style={styles.itemImagem} />
+            <Image source={getImageSource(item.imagem)} style={styles.itemImagem} />
             <View style={styles.itemInfo}>
               <Text style={styles.itemNome}>{item.produto}</Text>
               <Text style={styles.itemDescricao}>{item.descricao}</Text>
@@ -96,7 +100,7 @@ export default function App() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.itemCard}>
-            <Image source={{ uri: item.imagem }} style={styles.itemImagem} />
+            <Image source={getImageSource(item.imagem)} style={styles.itemImagem} />
             <View style={styles.itemInfo}>
               <Text style={styles.itemNome}>{item.produto}</Text>
               <Text style={styles.itemDescricao}>{item.descricao}</Text>
