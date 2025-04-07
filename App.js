@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useFonts, Inter_400Regular, Inter_600SemiBold } from "@expo-google-fonts/inter";
 
@@ -49,10 +49,28 @@ const getImageSource = (imagem) =>
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Inter_400Regular, Inter_600SemiBold });
+  const [expandedItems, setExpandedItems] = useState(new Set());
+  const [veganOptions, setVeganOptions] = useState({});
 
-  if (!fontsLoaded) {
-    return <Text>Carregando fontes...</Text>;
-  }
+  const toggleExpand = (id) => {
+    const updated = new Set(expandedItems);
+    updated.has(id) ? updated.delete(id) : updated.add(id);
+    setExpandedItems(updated);
+  };
+
+  const [specialGrainOptions, setSpecialGrainOptions] = useState({});
+  const toggleSpecialGrainOption = (id) => {
+    setSpecialGrainOptions((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const toggleVeganOption = (id) => {
+    setVeganOptions((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const cafesComLeiteVegano = ["Cappuccino", "Macchiato", "Latte", "Caramel Latte"];
+  const cafesComGraoEspecial = ["Expresso Simples", "Expresso Duplo", "Coado"];
+
+  if (!fontsLoaded) return <Text>Carregando fontes...</Text>;
 
   return (
     <ScrollView style={styles.container}>
@@ -79,19 +97,44 @@ export default function App() {
       {/* Lista de Cafés */}
       <Text style={styles.sectionTitle}>Menu de Cafés</Text>
       <FlatList
-        data={cafe}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.itemCard}>
-            <Image source={getImageSource(item.imagem)} style={styles.itemImagem} />
-            <View style={styles.itemInfo}>
-              <Text style={styles.itemNome}>{item.produto}</Text>
-              <Text style={styles.itemDescricao}>{item.descricao}</Text>
-              <Text style={styles.itemPreco}>{item.preco}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+  data={cafe}
+  keyExtractor={(item) => item.id}
+  renderItem={({ item }) => {
+    const isVeganOption = cafesComLeiteVegano.includes(item.produto);
+    const isSpecialGrainOption = cafesComGraoEspecial.includes(item.produto);
+    const isExpanded = expandedItems.has(item.id);
+
+    return (
+      <TouchableOpacity
+        style={styles.itemCard}
+        onPress={() => (isVeganOption || isSpecialGrainOption) && toggleExpand(item.id)}
+      >
+        <Image source={getImageSource(item.imagem)} style={styles.itemImagem} />
+        <View style={styles.itemInfo}>
+          <Text style={styles.itemNome}>{item.produto}</Text>
+          <Text style={styles.itemDescricao}>{item.descricao}</Text>
+          <Text style={styles.itemPreco}>{item.preco}</Text>
+
+          {/* Leite vegano */}
+          {isVeganOption && isExpanded && (
+            <TouchableOpacity onPress={() => toggleVeganOption(item.id)} style={styles.checkboxContainer}>
+              <View style={[styles.checkbox, veganOptions[item.id] && styles.checkboxSelected]} />
+              <Text style={styles.checkboxText}>Opção de leite vegano + R$5,00</Text>
+            </TouchableOpacity>
+          )}
+
+          {/* Grão especial */}
+          {isSpecialGrainOption && isExpanded && (
+            <TouchableOpacity onPress={() => toggleSpecialGrainOption(item.id)} style={styles.checkboxContainer}>
+              <View style={[styles.checkbox, specialGrainOptions[item.id] && styles.checkboxSelected]} />
+              <Text style={styles.checkboxText}>Grão selecionado especial + R$3,00</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </TouchableOpacity>
+    );
+  }}
+/>
 
       {/* Lista de Pratos */}
       <Text style={styles.sectionTitle}>Menu de Pratos</Text>
@@ -130,4 +173,8 @@ const styles = StyleSheet.create({
   itemNome: { fontSize: 16, fontFamily: "Inter_600SemiBold", color: "#fff" },
   itemDescricao: { fontSize: 12, fontFamily: "Inter_400Regular", color: "#bbb", marginBottom: 5 },
   itemPreco: { fontSize: 14, fontFamily: "Inter_600SemiBold", color: "#03DAC6" },
+  checkboxContainer: { flexDirection: "row", alignItems: "center", marginTop: 8 },
+  checkbox: { width: 18, height: 18, borderWidth: 1, borderColor: "#bbb", marginRight: 8, borderRadius: 4 },
+  checkboxSelected: { backgroundColor: "#03DAC6", borderColor: "#03DAC6" },
+  checkboxText: { color: "#bbb", fontFamily: "Inter_400Regular", fontSize: 13 },
 });
